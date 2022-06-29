@@ -1,2 +1,2 @@
-# dotfiles
+# Dotfiles
 work in progres :D
