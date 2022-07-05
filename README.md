@@ -3,7 +3,7 @@
 <hr>
 
 - Terminal: [Alacritty](https://alacritty.org/)
-- Color Scheme: [Catppuccin](https://github.com/catppuccin)
+- Color Scheme: [Catppuccin Mocha](https://github.com/catppuccin)
 - Bar: [XFCE4-Panel](https://docs.xfce.org/xfce/xfce4-panel/start)
 - Launcher: [Rofi](https://github.com/davatorium/rofi)
 - Homepage: [Mue](https://addons.mozilla.org/en-US/firefox/addon/mue/)
