@@ -5,6 +5,8 @@
 #     background: '#1E1E28'
 #     foreground: '#DADAE8'
 
+
+
 #   # Colors the cursor will use if `custom_cursor_colors` is true
 #   cursor:
 #     text: '#1E1E28'
@@ -35,6 +37,7 @@
 #   indexed_colors:
 #     - { index: 16, color: '#F2CECF' }
 #     - { index: 17, color: '#3E4058' }
+
 
 color_schemes: 
 
@@ -401,6 +404,7 @@ env:
   TERM: alacritty
 
 window:
+  opacity: 1.0
   # Window dimensions (changes require restart)
   #
   # Number of lines/columns (not pixels) in the terminal. The number of columns
@@ -409,7 +413,8 @@ window:
   dimensions:
     columns: 140
     lines: 31
-
+  
+  
   # Window position (changes require restart)
   #
   # Specified in number of pixels.
@@ -688,7 +693,6 @@ font:
   #   `- { index: 16, color: '#ff00ff' }`
   #
   #indexed_colors: []
-
   # Transparent cell backgrounds
   #
   # Whether or not `window.opacity` applies to all cell backgrounds or only to
@@ -741,7 +745,7 @@ bell:
 
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-#background_opacity: 0.9
+#window_opacity: 
 
 selection:
   # This string contains all characters that are used as separators for
