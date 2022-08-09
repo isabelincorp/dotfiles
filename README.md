@@ -8,5 +8,5 @@
 - Launcher: [Rofi](https://github.com/davatorium/rofi)
 - Homepage: [Mue](https://addons.mozilla.org/en-US/firefox/addon/mue/)
 <hr>
-<img src="https://i.redd.it/uef4hrkb4z881.png" width="60%">
+<img src="https://i.redd.it/kj24rh63tlg91.png" width="60%">
 <hr>
