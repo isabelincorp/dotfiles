@@ -8,8 +8,8 @@
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
-#Meme Aliases
-alias nano="micro"
+#Useful Aliases
+alias mi="micro"
 
 #Display ISO version and distribution information in short
 alias version="sed -n 1p /etc/os-release && sed -n 11p /etc/os-release && sed -n 12p /etc/os-release"
@@ -24,8 +24,8 @@ alias pkg-info="sudo pacman -Qi"
 alias local-install="sudo pacman -U"
 alias clr-cache="sudo pacman -Scc"
 alias unlock="sudo rm /var/lib/pacman/db.lck"
-alias uninstall="sudo pacman -Rs"
-alias yuninstall="yay -Rs"
+alias uninstall="sudo pacman -Rns"
+alias yuninstall="yay -Rns"
 alias autoremove="sudo pacman -Rns"
 
 
