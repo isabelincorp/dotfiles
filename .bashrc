@@ -1,6 +1,13 @@
 #
 # ~/.bashrc
 #
+# Wayland Flameshot
+
+export SDL_VIDEODRIVER=wayland
+export _JAVA_AWT_WM_NONREPARENTING=1
+export QT_QPA_PLATFORM=wayland
+export XDG_CURRENT_DESKTOP=sway
+export XDG_SESSION_DESKTOP=sway
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -33,5 +40,4 @@ alias gitui="gitui -t mocha.ron"
 export "MICRO_TRUECOLOR=1"
 export EDITOR="micro"
 source "/home/isabel/Scripts/mocha.sh"
-
 export PS1=" \[\e[00;35m\]λ \W \[\e[0m\]"
