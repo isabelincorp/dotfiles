@@ -14,21 +14,28 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu exec rofi -show run
-
+set $menu rofi -show run -monitor $(swaymsg -t get_workspaces | jq -e "map(select(.focused == true).num)[0]-(.|length)" | tr -d "-")
 ### Output configuration
 #
 # Wallpaper 
-exec_always swaybg -i ~/Pictures/Wallpapers/2023/4.png --output fill
+exec_always swaybg -i ~/Pictures/Wallpapers/2024/3.jpg -m fill
 # Start Mako
-exec_always mako
-
+exec_always makov
+exec_always copyq 
+exec_always nm-applet
+exec_always import-gsettings
+exec_always polkit-gnome
+exec_always blueman-applet
+# exec_always wlsunset -t 2000 -S 6:00 -s 18:00
 #
+xwayland enable
 
 # Example configuration:
 #
 output DP-3 mode 1920x1080@143.981Hz position 1920,0
 output DP-2 mode 1920x1080@143.981Hz position 0,0
+output HDMI-A-1 mode 1920x1080@60.000Hz position 3840,0 scale 1.80 adaptive_sync on transform 270
+
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -70,19 +77,22 @@ input "Glorious Model O Wireless" {
     bindsym $mod+Shift+c kill
 
     # Start your launcher
-    bindsym $mod+r exec $menu
+    bindsym $mod+r exec rofi -show run
+    bindsym $mod+mod1+r exec rofi -show drun
+    bindsym $mod+mod1+shift+r exec wofi --show run
     bindsym $mod+e exec thunar
 	bindsym $mod+f exec firefox
 	bindsym $mod+w exec firefox -p "School"
-	bindsym $mod+c exec discocss
+	bindsym $mod+c exec firefox -p discord -new-window https://discord.com/channels/@me
 	bindsym $mod+alt+c exec "./Scripts/discordthemeupdate.sh"
 	bindsym $mod+m exec rofimoji
-	bindsym $mod+t exec nheko
+	bindsym $mod+t exec telegram-desktop
 	bindsym $mod+period exec rofimoji
-	bindsym $mod+v exec showgreenclip
-	bindsym $mod+d exec swaylock --color "#000000" --grace 10000 --fade-in 0.0
+	bindsym $mod+v exec copyq menu
+	bindsym $mod+d exec swaylock --color "#000000" --grace 10000 --grace-no-mouse --fade-in 0.0
 	bindsym $mod+s exec "env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify %U"
-	bindsym Print exec flameshot gui
+	bindsym $mod+y exec kcalc
+	bindsym Print exec grim -g "$(slurp)" -t png - | wl-copy
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
@@ -94,7 +104,7 @@ input "Glorious Model O Wireless" {
     bindsym $mod+Shift+r reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+l exec wlogout
+    bindsym $mod+Shift+l exec ./.config/rofi/swaypowermenu.sh
 # bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 #
 # Moving around:
@@ -123,6 +133,9 @@ input "Glorious Model O Wireless" {
 #
 # Workspaces:
 #
+workspace 1 output DP-3
+workspace 10 output DP-2
+workspace 15 output HDMI-A-1
     # Switch to workspace
     bindsym $mod+1 workspace number 1
     bindsym $mod+2 workspace number 2
@@ -134,6 +147,11 @@ input "Glorious Model O Wireless" {
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
+    bindsym $mod+alt+1 workspace number 11
+    bindsym $mod+alt+2 workspace number 12
+    bindsym $mod+alt+3 workspace number 13
+    bindsym $mod+alt+4 workspace number 14
+    bindsym $mod+alt+5 workspace number 15
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
@@ -145,6 +163,13 @@ input "Glorious Model O Wireless" {
     bindsym $mod+Shift+8 move container to workspace number 8
     bindsym $mod+Shift+9 move container to workspace number 9
     bindsym $mod+Shift+0 move container to workspace number 10
+    bindsym $mod+Shift+alt+1 move container to workspace number 11
+    bindsym $mod+Shift+alt+2 move container to workspace number 12
+    bindsym $mod+Shift+alt+3 move container to workspace number 13
+    bindsym $mod+Shift+alt+4 move container to workspace number 14
+    bindsym $mod+Shift+alt+5 move container to workspace number 15
+
+    
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
@@ -208,25 +233,24 @@ default_border none
 for_window [title=""] title_format ""
 default_floating_border none
 
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-exec hash dbus-update-activation-environment 2>/dev/null && \
-     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
      
 # Floating Windows
 for_window [app_id="imv"] floating enable
-for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
+for_window [app_id="copyq"] floating enable
 
 include $HOME/.config/sway/config.d/*
 
-xwayland enable
-
-# bindsym Print exec flameshot
+for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 gaps inner 4
-bindsym $mod+Shift+Tab move scratchpad
+bindsym $mod+Shift+d move scratchpad
 bindsym $mod+Tab scratchpad show
-seat * xcursor_theme Catppuccin-Macchiato-Dark-Cursors 32
-set $my_cursor_size 32
+seat * xcursor_theme Catppuccin-Frappe-Dark-Cursors 24
+set $gnome-schema org.desktop.interface
+set $my_cursor_size 24
 exec_always {
-    gsettings set org.gnome.desktop.interface cursor-theme $my_cursor
-    gsettings set org.gnome.desktop.interface cursor-size $my_cursor_size
+    gsettings set $gnome-schema cursor-theme $my_cursor
+    gsettings set $gnome-schema cursor-size $my_cursor_size
 }
