@@ -1,8 +1,8 @@
 import:
   # uncomment the flavour you want below:
 #  - ~/.config/alacritty/themes/catppuccin-mocha.yml
-  - ~/.config/alacritty/themes/catppuccin-macchiato.yml
-#  - ~/.config/alacritty/themes/catppuccin-frappe.yml
+#  - ~/.config/alacritty/themes/catppuccin-macchiato.yml
+  - ~/.config/alacritty/themes/catppuccin-frappe.yml
 #  - ~/.config/alacritty/themes/catppuccin-latte.yml
 
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
