@@ -1,0 +1,60 @@
+@import "frappe.css";
+* {
+    border-radius: 0px;
+    font-family: Fira Code Medium;
+    font-size: 14px;
+    min-height: 0px;
+}
+
+window#waybar {
+    background: @crust;
+}
+
+#workspaces,
+#mode,
+#cpu,
+#memory,
+#clock { 
+    margin: 2px 0px;
+}
+
+#workspaces button,
+#mode,
+#cpu,
+#memory,
+#clock {
+    padding: 0px 0px;
+    border-radius: 0px;
+    box-shadow: 0px 0px rgba(22, 19, 32, 0.5);
+}
+
+#workspaces button {
+    background: @surface0;
+    color: @text;
+    margin: 0px 3px;
+}
+
+#workspaces button.focused {
+    background: @surface0;
+    color: @mauve;
+}
+
+#mode {
+    background: @crust;
+    color: @text;
+}
+
+#cpu {
+    background: @crust;
+    color: @text;
+}
+
+#memory {
+    background: @crust;
+    color: @text;
+}
+
+#clock {
+    background: @crust;    
+    color: @text;
+}

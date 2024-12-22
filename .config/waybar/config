@@ -1,0 +1,48 @@
+{
+    "layer": "bottom",
+    "position": "top",
+    "height": 28,
+    "spacing": 2,
+    "margin-top": 0,
+    "margin-bottom":0,
+
+    // Choose the order of the modules
+
+    "modules-left":[  "sway/workspaces", "wlr/taskbar"],
+    "modules-center": [ ""],
+    "modules-right":["tray", "clock"],
+    // Modules configuration
+     "wlr/taskbar": {
+        "format": "{icon}",
+        "icon-size": 20,
+        "icon-theme": "Star",
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-middle": "close",
+        "on-click-right": "minimize"
+    },
+    "tray": {
+        "icon-size": 20,
+        "spacing": 0,
+        "margin-top": 10,
+        "margin-bottom": 0,
+    },
+    "clock": {
+        // "timezone": "America/Los_Angeles",
+        "format": "{:%I:%M %p - %b %a %d }"
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "Connected  ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "on-click-right": "bash ~/.config/rofi/wifi_menu/rofi_wifi_menu"
+
+    },
+  "sway/workspaces": {
+    "disable-scroll": false
+    }
+}

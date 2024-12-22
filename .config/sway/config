@@ -18,13 +18,13 @@ set $menu rofi -show run -monitor $(swaymsg -t get_workspaces | jq -e "map(selec
 ### Output configuration
 #
 # Wallpaper 
-exec_always swaybg -i ~/Pictures/Wallpapers/2024/3.jpg -m fill
+exec_always swaybg -i ~/Pictures/Wallpapers/2024/11.jpg -m fill
 # Start Mako
-exec_always makov
+exec_always mako
 exec_always copyq 
 exec_always nm-applet
 exec_always import-gsettings
-exec_always polkit-gnome
+exec "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" --no-startup-id
 exec_always blueman-applet
 # exec_always wlsunset -t 2000 -S 6:00 -s 18:00
 #
@@ -33,8 +33,9 @@ xwayland enable
 # Example configuration:
 #
 output DP-3 mode 1920x1080@143.981Hz position 1920,0
-output DP-2 mode 1920x1080@143.981Hz position 0,0
+output DP-2 mode 1920x1080@120.981Hz position 0,0
 output HDMI-A-1 mode 1920x1080@60.000Hz position 3840,0 scale 1.80 adaptive_sync on transform 270
+#output HDMI-A-1 mode 1920x1080@60.00Hz position 0,0
 
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
@@ -82,17 +83,19 @@ input "Glorious Model O Wireless" {
     bindsym $mod+mod1+shift+r exec wofi --show run
     bindsym $mod+e exec thunar
 	bindsym $mod+f exec firefox
+	bindsym $mod+q exec evince
 	bindsym $mod+w exec firefox -p "School"
 	bindsym $mod+c exec firefox -p discord -new-window https://discord.com/channels/@me
-	bindsym $mod+alt+c exec "./Scripts/discordthemeupdate.sh"
-	bindsym $mod+m exec rofimoji
+	bindsym $mod+p exec keepassxc
+	bindsym $mod+m exec nheko
 	bindsym $mod+t exec telegram-desktop
+	bindsym $mod+g exec signal-desktop
 	bindsym $mod+period exec rofimoji
 	bindsym $mod+v exec copyq menu
 	bindsym $mod+d exec swaylock --color "#000000" --grace 10000 --grace-no-mouse --fade-in 0.0
 	bindsym $mod+s exec "env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify %U"
 	bindsym $mod+y exec kcalc
-	bindsym Print exec grim -g "$(slurp)" -t png - | wl-copy
+	bindsym Print exec grim -g "$(slurp)" -t png - | swappy -f -
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
@@ -134,8 +137,9 @@ input "Glorious Model O Wireless" {
 # Workspaces:
 #
 workspace 1 output DP-3
-workspace 10 output DP-2
-workspace 15 output HDMI-A-1
+workspace 15 output DP-2
+workspace 10 output HDMI-A-1
+#workspace 10 DP-2
     # Switch to workspace
     bindsym $mod+1 workspace number 1
     bindsym $mod+2 workspace number 2
@@ -220,7 +224,7 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+n mode "resize"
+# bindsym $mod+n mode "resize"
 
 #
 # Status Bar:
@@ -240,10 +244,10 @@ for_window [app_id="copyq"] floating enable
 
 include $HOME/.config/sway/config.d/*
 
-for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
 gaps inner 4
 bindsym $mod+Shift+d move scratchpad
 bindsym $mod+Tab scratchpad show
@@ -253,4 +257,5 @@ set $my_cursor_size 24
 exec_always {
     gsettings set $gnome-schema cursor-theme $my_cursor
     gsettings set $gnome-schema cursor-size $my_cursor_size
+    gsettings set org.gnome.desktop.wm.preferences button-layout ''
 }

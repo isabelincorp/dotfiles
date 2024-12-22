@@ -34,12 +34,11 @@ alias unlock="sudo rm /var/lib/pacman/db.lck"
 alias uninstall="sudo pacman -Rns"
 alias yuninstall="yay -Rns"
 alias autoremove="sudo pacman -Rns"
-alias gitui="gitui -t mocha.ron"
-
+alias gitui="gitui -t /home/isabel/.config/gitui/theme.ron"
+alias neofetch="fastfetch"
 
 export "MICRO_TRUECOLOR=1"
 export EDITOR="micro"
-source "/home/isabel/Scripts/mocha.sh"
 export PS1=" \[\e[00;35m\]λ \W \[\e[0m\]"
 
 # Created by `pipx` on 2023-08-01 03:16:26
